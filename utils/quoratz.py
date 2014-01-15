@@ -75,4 +75,4 @@ if __name__ == '__main__':
 	print "local time ", d1.strftime("%A, %d. %B %Y %I:%M%p")
 	print "UTC time ", d2.strftime("%A, %d. %B %Y %I:%M%p")
 	print "U.S. time ", dx.strftime("%A, %d. %B %Y %I:%M%p")
-
+	print 'ISO U.S. time', dx.date().isoformat()
