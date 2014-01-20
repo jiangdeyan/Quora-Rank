@@ -174,6 +174,11 @@ if __name__ == '__main__':
 	#test("Updated 24 Dec")
 	test("3 Dec, 2012")
 	test("Updated 10 Dec, 2012")
-
+	test("Updated 27 Dec")
+	test("23 Sep")
+	test("Mon")
+	test("Updated 4h ago")
+	test("4h ago")
+	test("54m ago")
 
 
