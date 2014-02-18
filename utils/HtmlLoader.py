@@ -1,18 +1,27 @@
 import urllib2
 import URL
 import ContentCook
+from COntentCook import settings
 
 def doFirstRequest(url):
 	rq = urllib2.Request(url)
 	setQuestionHeader(rq, url)
-	content = urllib2.urlopen(rq)
+	#content = urllib2.urlopen(rq,timeout=50000)
+	f = open('1') 
+	content = f
+	#print content.read()
+	settings(content)
+	#print content.info()
+	#print 
+	#print content.info()['Set-Cookie']
 	params = ContentCook.getLoadParams(content)
 	if params != None:
 		t = URL.URL4Load(url)
 		t.buildDynamicURL(params)
 		load_rq = urllib2.Request(t.getURL())
 		setQuestLoadHeader(load_rq,t)
-		print  urllib2.urlopen(load_rq).read()
+		#print load_rq.header_items()
+		#print  urllib2.urlopen(load_rq).read()
 
 def setQuestionHeader(rq, url):
 	t = URL.URLtool(url)
@@ -33,9 +42,10 @@ def setQuestLoadHeader(rq, load):
 	rq.add_header('Referer', load.getReferenceURL())
 	rq.add_header('Accept-Language','zh-CN')
 	rq.add_header('User-Agent','Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; rv:11.0) like Gecko')
-	rq.add_header('Host', load.getDomain(1))
+	rq.add_header('Host', load.getDomain(0))
 	rq.add_header('DNT','1')
-	rq.add_header("Connection",'Keep-Alive')
+	rq.add_header('Connection','Keep-Alive')
+	rq.add_header('Accept-Encoding','gzip, deflate')
 
 
 
