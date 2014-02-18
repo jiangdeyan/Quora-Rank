@@ -1,6 +1,4 @@
 import random
-import math
-import time
 
 HTTP = 'http://'
 HTTPS = 'https://'
@@ -38,7 +36,7 @@ def base36encode(number, alphabet='0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'):
         number, i = divmod(number, len(alphabet))
         base36 = alphabet[i] + base36
 
-    return sign + base36.lower()
+    return sign + base36
 
 
 class URLError(Exception):
@@ -65,33 +63,22 @@ class URLtool:
 			raise URLError(self.url, 'getRelative error')
 		return self._url[len(topD)+index:]
 
-	def getReferenceURL(self):
-		return self._refer_url
-	def getURL(self):
-		return self._url
-
 class URL4Load(URLtool):
-	def __init__(self, rf_url, params):
-		self._refer_url = rf_url	
+	def __init__(self, url, params):
+		self._refer_url = url	
 		i = random.randint(100000,999999)
 		url = HTTP+TCH+str(i)+QUEST_URL_PART1+params[2]+QUEST_URL_PART2+params[0]+QUEST_URL_PART3+params[1]+QUEST_URL_PART4_TIMEOUT+TEST
 		URLtool.__init__(self,url)
 
-
-
-
-class URL4POST(URLtool):
-	def __init__(self, rf_url, url):
-		self._refer_url = rf_url
-		URLtool.__init__(self,url)
-	
-
+	def getReferenceURL(self):
+		return self._refer_url
+	def getURL(self):
+		return self._url
 
 
 if __name__ == '__main__':
 	a = URLtool("http://www.quora.com/Facts-and-Trivia/Off-the-top-of-your-head-what-is-the-most-interesting-fact-you-know")
 	print a.getDomain(99)
 	print a.getRelative()
-	print base36encode(getTimeStamp()*int(1E3))
 	
 
