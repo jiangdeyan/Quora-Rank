@@ -1,6 +1,4 @@
 import random
-import math
-import time
 
 HTTP = 'http://'
 HTTPS = 'https://'
@@ -14,31 +12,6 @@ QUEST_URL_PART4 = '&callback=jsonp'
 
 TEST = '1442a6f999678809a14506544'
 
-#make convert python timestamp to js style. Just fake it
-def getTimeStamp():
-	return int(math.floor(time.time()*1e3))
-
-#encode base on 36 radix
-def base36encode(number, alphabet='0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'):
-    """Converts an integer to a base36 string."""
-    if not isinstance(number, (int, long)):
-        raise TypeError('number must be an integer')
-
-    base36 = ''
-    sign = ''
-
-    if number < 0:
-        sign = '-'
-        number = -number
-
-    if 0 <= number < len(alphabet):
-        return sign + alphabet[number]
-
-    while number != 0:
-        number, i = divmod(number, len(alphabet))
-        base36 = alphabet[i] + base36
-
-    return sign + base36.lower()
 
 
 class URLError(Exception):
@@ -80,7 +53,7 @@ class URL4Load(URLtool):
 
 
 
-class URL4POST(URLtool):
+class URL4Post(URLtool):
 	def __init__(self, rf_url, url):
 		self._refer_url = rf_url
 		URLtool.__init__(self,url)
@@ -92,6 +65,6 @@ if __name__ == '__main__':
 	a = URLtool("http://www.quora.com/Facts-and-Trivia/Off-the-top-of-your-head-what-is-the-most-interesting-fact-you-know")
 	print a.getDomain(99)
 	print a.getRelative()
-	print base36encode(getTimeStamp()*int(1E3))
+	#print base36encode(getTimeStamp()*int(1E3))
 	
 
